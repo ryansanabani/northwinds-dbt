@@ -1,0 +1,1 @@
+select supplier_id, company_name AS name from northwinds_rds_public.suppliers
