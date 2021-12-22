@@ -1,0 +1,1 @@
+SELECT SPLIT(contact_name, ' ')[0] AS first_name, SPLIT(contact_name, ' ')[1] AS last_name, address, phone FROM northwinds_rds_public.customers
