@@ -1,5 +1,5 @@
 WITH source AS (
-    SELECT * FROM PAGILA_INC.NORTHWINDS_RDS_PUBLIC.SUPPLIERS
+    SELECT * FROM {{source('rds', 'suppliers')}}
 ),
     renamed AS (
         SELECT supplier_id, country, 

@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: rds
+    database: PAGILA_INC
+    freshness:
+      warn_after: {count: 12, period: hour}
+    loaded_at_field: _fivetran_synced
+    schema: NORTHWINDS_RDS_PUBLIC
+    tables:
+      - name: suppliers
+      - name: customers
+        # freshness:
+        #   error_after: {count: 6, period: hour}
