@@ -3,12 +3,12 @@ customers AS (
     SELECT * FROM {{source('rds', 'customers')}}
 ),
 companies AS (
-    SELECT * FROM DBT_JIGSAWLABS_1.STG_RDS_COMPANIES
+    SELECT * FROM {{ref('stg_rds_companies')}}
 ),
 renamed AS (
     SELECT
     company_id,
-    concat('rds-', customer_id) AS proper_customer_id,
+    concat('rds-', customer_id) AS customer_id,
     SPLIT_PART(contact_name, ' ', 1) AS first_name,
     SPLIT_PART(contact_name, ' ', -1)   AS last_name,
     TRANSLATE(phone, '(, ), -, ., ', '') AS clean_phone,
@@ -18,17 +18,17 @@ renamed AS (
     || SUBSTRING(clean_phone, 4, 3) || '-'
     || SUBSTRING(clean_phone, 7, 4)
     ELSE NULL  
-    END AS finished_phone
+    END AS phone
     FROM customers
-    JOIN companies ON companies.company_name = customers.company_name 
+    JOIN companies ON companies.name = customers.company_name 
 ),
-final AS (
+staged_rds_customers AS (
     SELECT 
-    company_id,
-    finished_phone,
+    customer_id,
     first_name,
     last_name,
-    proper_customer_id
+    phone,
+    company_id
     FROM renamed
 )
-SELECT * FROM final
+SELECT * FROM staged_rds_customers
