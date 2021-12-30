@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: hubspot
+    database: PAGILA_INC
+    schema: HUBSPOT
+    tables:
+      - name: CONTACTS
