@@ -8,7 +8,7 @@ companies AS (
 renamed AS (
     SELECT
     company_id,
-    concat('rds-', customer_id) AS customer_id,
+    concat('rds-', customer_id) AS contact_id,
     SPLIT_PART(contact_name, ' ', 1) AS first_name,
     SPLIT_PART(contact_name, ' ', -1)   AS last_name,
     TRANSLATE(phone, '(, ), -, ., ', '') AS clean_phone,
@@ -24,7 +24,7 @@ renamed AS (
 ),
 staged_rds_customers AS (
     SELECT 
-    customer_id,
+    contact_id,
     first_name,
     last_name,
     phone,
