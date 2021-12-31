@@ -37,4 +37,7 @@ reintegrate_rds_companies_columns AS (
     LEFT OUTER JOIN stg_rds_companies ON stg_rds_companies.company_id = dedupli_companies.rds_companies_id
     ORDER BY rds_companies_id, name ASC
 )
-SELECT * FROM reintegrate_rds_companies_columns
+SELECT 
+{{ dbt_utils.surrogate_key('name') }} AS company_pk,
+* 
+FROM reintegrate_rds_companies_columns

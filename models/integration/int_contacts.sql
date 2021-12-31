@@ -35,4 +35,7 @@ dedupli_contacts AS (
     GROUP BY first_name, last_name
     ORDER BY rds_contact_id, last_name ASC
 )
-SELECT * FROM dedupli_contacts
+SELECT 
+{{ dbt_utils.surrogate_key(['first_name', 'last_name', 'phone']) }} AS contact_pk,
+* 
+FROM dedupli_contacts
