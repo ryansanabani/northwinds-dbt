@@ -32,6 +32,7 @@ reintegrate_rds_companies_columns AS (
     dedupli_companies.name,
     city,
     postal_code,
+    address,
     country
     FROM dedupli_companies
     LEFT OUTER JOIN stg_rds_companies ON stg_rds_companies.company_id = dedupli_companies.rds_companies_id
