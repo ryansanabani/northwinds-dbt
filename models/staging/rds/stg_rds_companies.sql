@@ -7,9 +7,10 @@ staged_rds_companies as (
     company_name AS name,
     max(address) AS address,
     max(city) AS city,
-    max(postal_code) AS postal_caode,
+    max(postal_code) AS postal_code,
     max(country) AS country
     FROM source
     GROUP BY name
 )
 SELECT * FROM staged_rds_companies
+ORDER BY name ASC

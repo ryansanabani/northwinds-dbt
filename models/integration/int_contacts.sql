@@ -22,17 +22,17 @@ merged_contacts AS (
     NULL AS hubspot_compnay_id, company_id AS rds_company_id
     FROM rds_customers
 ),
-deduped AS (
-SELECT
-max(hubspot_contact_id) AS hubspot_contact_id,
-max(rds_contact_id) AS rds_contact_id, 
-first_name, 
-last_name, 
-max(phone) AS phone,
-max(hubspot_company_id) AS hubspot_company_id,
-max(rds_company_id) AS rds_company_id  
-FROM merged_contacts
-GROUP BY first_name, last_name
-ORDER BY last_name ASC
+dedupli_contacts AS (
+    SELECT
+    max(hubspot_contact_id) AS hubspot_contact_id,
+    max(rds_contact_id) AS rds_contact_id, 
+    first_name, 
+    last_name, 
+    max(phone) AS phone,
+    max(hubspot_company_id) AS hubspot_company_id,
+    max(rds_company_id) AS rds_company_id  
+    FROM merged_contacts
+    GROUP BY first_name, last_name
+    ORDER BY rds_contact_id, last_name ASC
 )
-SELECT * FROM deduped
+SELECT * FROM dedupli_contacts

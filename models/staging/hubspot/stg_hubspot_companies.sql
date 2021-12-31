@@ -9,3 +9,4 @@ staged_hubspot_companies AS (
     GROUP BY name
 )
 SELECT * FROM staged_hubspot_companies
+ORDER BY name ASC
