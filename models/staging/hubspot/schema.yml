@@ -1,0 +1,11 @@
+version: 2
+
+models:
+  - name: stg_hubspot_contacts
+    columns:
+      - name: first_name
+        tests:
+          - not_null
+      - name: last_name
+        tests:
+          - not_null
